@@ -7,4 +7,4 @@ It uses the 'snoowrap' Reddit API JavaScript wrapper and npm package - https://g
 
 Many thanks to @not-an-aardvark.
 
-Thanks as well to @mattdiamond, whose /r/askouija bot inspired the idea for OneWordEachBot - https://github.com/mattdiamond/ouijabot. 
+Thanks as well to @mattdiamond, whose /r/askouija bot inspired the idea for /u/onewordeachbot - https://github.com/mattdiamond/ouijabot. 

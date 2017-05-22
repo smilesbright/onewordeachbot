@@ -1,12 +1,12 @@
 {
   "name": "onewordeachbot",
   "version": "1.0.0",
-  "description": "",
+  "description": "A bot for /r/onewordeach",
   "main": "onewordeachbot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Miles Bright",
   "license": "MIT",
   "dependencies": {
     "jsonfile": "^3.0.0",

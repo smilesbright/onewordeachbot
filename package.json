@@ -1,0 +1,15 @@
+{
+  "name": "onewordeachbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "onewordeachbot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "jsonfile": "^3.0.0",
+    "snoowrap": "^1.14.0"
+  }
+}

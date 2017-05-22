@@ -6,3 +6,5 @@ The OneWordEachBot is a set of scripts each set to run every 5 minutes or so. Th
 It uses the 'snoowrap' Reddit API JavaScript wrapper and npm package - https://github.com/not-an-aardvark/snoowrap.
 
 Many thanks to @not-an-aardvark.
+
+Thanks as well to @mattdiamond, whose /r/askouija bot inspired the idea for OneWordEachBot - https://github.com/mattdiamond/ouijabot. 

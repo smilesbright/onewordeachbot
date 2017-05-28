@@ -18,5 +18,5 @@ Launched 5/21/2017
 
 The installation of node-canvas and therefore text-to-image requires several packages:
 
-https://github.com/Automattic/node-canvas/wiki/Installation
+https://github.com/Automattic/node-canvas/wiki
 

@@ -1,7 +1,10 @@
+// stickylatestpost.js
+// Copyright (c) 2017 Miles Bright, MIT License
+// https://github.com/smilesbright/onewordeachbot
+
 'use strict';
 
 const snoowrap = require('snoowrap');
-const jsonfile = require('jsonfile');
 
 const requestParameters = {
 	client_id: process.env.CLIENTID,

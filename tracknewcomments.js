@@ -1,3 +1,7 @@
+// tracknewcomments.js
+// Copyright (c) 2017 Miles Bright, MIT License
+// https://github.com/smilesbright/onewordeachbot
+
 'use strict';
 
 const snoowrap = require('snoowrap');
@@ -36,7 +40,7 @@ function hasPunctuation(text) {
 // This script requests new comments from /r/onewordeach and adds comments with
 // punctuation to comments.json data storage file to be tracked.
 //
-jsonfile.readFile('./Desktop/onewordeachbot/comments.json', function(err, obj) {
+jsonfile.readFile('./comments.json', function(err, obj) {
 
 	request.getNewComments('onewordeach').then(function(newComments) {
 		// go through the list of new comments
@@ -64,7 +68,7 @@ jsonfile.readFile('./Desktop/onewordeachbot/comments.json', function(err, obj) {
 						var newComment = {id: newComment.id, thread: newComment.link_id,
 							hasposted: 0, daysOld: 0, score: newComment.score};
 						obj.comments.push(newComment);
-						jsonfile.writeFile('./Desktop/onewordeachbot/comments.json', obj); // < completely rewrites entire json file.
+						jsonfile.writeFile('./comments.json', obj); // < completely rewrites entire json file.
 					}
 				}
 			}
@@ -72,14 +76,4 @@ jsonfile.readFile('./Desktop/onewordeachbot/comments.json', function(err, obj) {
 	});
 
 });
-
-
-
-
-
-
-
-
-
-
 

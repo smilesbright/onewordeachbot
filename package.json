@@ -1,15 +1,21 @@
 {
   "name": "onewordeachbot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A bot for /r/onewordeach",
-  "main": "onewordeachbot.js",
+  "main": "tracknewcomments.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Miles Bright",
   "license": "MIT",
   "dependencies": {
+    "canvas": "^1.6.5",
+    "find": "^0.2.7",
+    "fs": "0.0.1-security",
+    "imgur-node-api": "^0.1.0",
     "jsonfile": "^3.0.0",
-    "snoowrap": "^1.14.0"
+    "snoowrap": "^1.14.0",
+    "text-to-image": "^1.1.0"
   }
 }
+

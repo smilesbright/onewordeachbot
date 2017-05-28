@@ -1,3 +1,7 @@
+// refreshscores.js
+// Copyright (c) 2017 Miles Bright, MIT License
+// https://github.com/smilesbright/onewordeachbot
+
 'use strict';
 
 const snoowrap = require('snoowrap');
@@ -17,12 +21,12 @@ const request = new snoowrap(requestParameters);
 //
 // Refresh comment scores in comments.json.
 //
-jsonfile.readFile('./Desktop/onewordeachbot/comments.json', function(err, obj) {
+jsonfile.readFile('./comments.json', function(err, obj) {
 
 	obj.comments.forEach(function(listing) {
 		request.getComment(listing.id).refresh().then(comment => {
 			listing.score = comment.score;
-			jsonfile.writeFile('./Desktop/onewordeachbot/comments.json', obj);
+			jsonfile.writeFile('./comments.json', obj);
 		});
 	});
 

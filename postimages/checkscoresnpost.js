@@ -1,7 +1,16 @@
+// checkscoresnpost.js
+// Copyright (c) 2017 Miles Bright, MIT License
+// https://github.com/smilesbright/onewordeachbot
+
 'use strict';
 
 const snoowrap = require('snoowrap');
 const jsonfile = require('jsonfile');
+const textToImage = require('text-to-image');
+const imgur = require('imgur-node-api');
+const find = require('find');
+const fs = require('fs');
+
 
 const requestParameters = {
 	client_id: process.env.CLIENTID,
@@ -11,12 +20,14 @@ const requestParameters = {
 	user_agent: process.env.USERAGENT
 };
 
+imgur.setClientID(process.env.IMGURID);
+
 const request = new snoowrap(requestParameters);
 
 const UPVOTE_THRESHOLD = 7;
 
 
-jsonfile.readFile('./Desktop/onewordeachbot/comments.json', function(err, obj) {
+jsonfile.readFile('../comments.json', function(err, obj) {
 
 	// Check refreshed scores of comments in list.
 	dance:
@@ -40,20 +51,17 @@ jsonfile.readFile('./Desktop/onewordeachbot/comments.json', function(err, obj) {
 				}
 				obj.comments[siblingIndices[j]].hasposted = 1;
 			}
-			jsonfile.writeFile('./Desktop/onewordeachbot/comments.json', obj);
+			jsonfile.writeFile('../comments.json', obj);
 			
-			// compile the sentence. set comments to hasposted = 1
-
+			// compile the sentence.
 			var parentID = obj.comments[winningIndex].id;
-			//console.log(parentID);
 			parentID = "t1_" + parentID;
-			var wordString = new String();
+			var wordString = "";
 			addWord(parentID);
-			function addWord(parentID) { // (parentID[1] == '1' && newWord == 1) {
+			function addWord(parentID) {
 				request.getComment(parentID).refresh().then(function(parent) {
 					parentID = parent.parent_id;
 					wordString = parent.body + " " + wordString;
-					//console.log(wordString);
 					if (parentID[1] == '1') {
 						addWord(parentID);
 					}
@@ -62,7 +70,6 @@ jsonfile.readFile('./Desktop/onewordeachbot/comments.json', function(err, obj) {
 						for (var i=0; i < wordString.length - 1; i++) {
 							if (wordString[i] === ' ' && wordString[i+1] === ' ') {
 								wordString = wordString.slice(0, i) + wordString.slice(i + 1, wordString.length);
-								//wordString.replace("  ", " ");
 							}
 						}
 						for (var i=0; i < wordString.length; i++) {
@@ -72,26 +79,22 @@ jsonfile.readFile('./Desktop/onewordeachbot/comments.json', function(err, obj) {
 								}
 							}
 						}
-						// console.log(parentID);
-						// Post sentence and sticky
-						var spoilerPost = "[/r/onewordeach says:](/" + wordString + ")";
-						request.getSubmission(parentID).reply(spoilerPost);
-						//console.log(wordString);
-						// sticky post with a separate script.
-						// request.getUser('onewordeachbot').getComments().then(console.log);
+						// post image to node canvas thingy in working directory.
+						textToImage.generate(wordString, {debug: true, maxWidth: 600, fontSize: 36, lineHeight: 45, margin: 16, bgColor: "#3aa41e", textColor: "white"});
+						find.file(/\.png$/, __dirname, function(files) {
+							imgur.upload(files[files.length -1].slice(files[files.length -1].length - 23, files[files.length -1].length), function(err, res) {
+								// make reddit request here.
+								var spoilerPost = "[/r/onewordeach says:](" + res.data.link + ")";
+								request.getSubmission(parentID).reply(spoilerPost);
+							});
+							fs.unlink(files[files.length -1].slice(files[files.length -1].length - 23, files[files.length -1].length));
+						});
 					}
 				});
 			}
-			break dance;
+			break dance; // can only post one winning sentence per execution
 		}
 	}
 
 });
-
-
-
-
-
-
-
 

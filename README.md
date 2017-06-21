@@ -7,10 +7,6 @@ The onewordeachbot is a set of scripts set to run via crontab every 5 minutes or
 
 It uses the 'snoowrap' Reddit API wrapper and npm package - https://github.com/not-an-aardvark/snoowrap.
 
-Many thanks to @not-an-aardvark.
-
-Thanks as well to @mattdiamond, whose /r/askouija bot inspired the idea for /u/onewordeachbot - https://github.com/mattdiamond/ouijabot. 
-
 Launched 5/21/2017
 
 
